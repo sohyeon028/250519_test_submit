@@ -24,6 +24,7 @@
 
         .visual .inner{
             height: 660px;
+            position: relative;
         }
 
         .visual .title{
@@ -206,7 +207,7 @@
 
             gsap.to(track, {
             x: direction === 'left' ? `-=${totalWidth}` : `+=${totalWidth}`,
-            duration: 20,
+            duration: 10,
             ease: "none",
             repeat: -1,
             modifiers: {
