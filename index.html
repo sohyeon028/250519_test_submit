@@ -200,38 +200,36 @@
         });
 
 
-        // 끊김 없는 무한 슬라이더 (modifiers 플러그인 이용)
-        function startInfiniteSlider(selector, direction = 'left') {
-        const track = document.querySelector(`${selector} .track`);
-        const totalWidth = track.scrollWidth / 1;
+        // 끊김 없는 무한 슬라이더 (GSAP modifiers 사용 + 중복 방지)
+function startInfiniteSlider(selector, direction = 'left', duration = 20) {
+    const track = document.querySelector(`${selector} .track`);
+    if (!track) return;
 
-            gsap.to(track, {
-            x: direction === 'left' ? `-=${totalWidth}` : `+=${totalWidth}`,
-            duration: 10,
-            ease: "none",
-            repeat: -1,
-            modifiers: {
-                x: gsap.utils.unitize(x => {
-                    let value = parseFloat(x);
+    // 기존 애니메이션 제거 (중복 실행 방지)
+    gsap.killTweensOf(track);
 
-                    if (direction === 'left') {
-                    if (value <= -totalWidth) {
-                        value += totalWidth;
-                    }
-                } else {
-                    if (value >= 0) {
-                        value -= totalWidth;
-                    }
-                }
+    const totalWidth = track.scrollWidth;
 
-                return value;
-                })
-            }
-        });
-    }
+    gsap.to(track, {
+        x: direction === 'left' ? `-=${totalWidth}` : `+=${totalWidth}`,
+        duration: duration,
+        ease: "none",
+        repeat: -1,
+        modifiers: {
+            x: gsap.utils.unitize(x => {
+                let value = parseFloat(x);
+                return direction === 'left'
+                    ? (value <= -totalWidth ? value + totalWidth : value)
+                    : (value >= 0 ? value - totalWidth : value);
+            })
+        }
+    });
+}
 
         // 하단: 오른 → 왼
         startInfiniteSlider('.infinite-slider.bottom', 'right');
+
+        
     </script>
 
 
