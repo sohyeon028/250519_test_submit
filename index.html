@@ -15,7 +15,6 @@
         width: 1920px;
         margin: 0 auto;
         position: relative;
-
         background: linear-gradient(to right, #f14949, #850d0d);
         }
     
@@ -66,36 +65,59 @@
         }
 
         .menu-name {
-        position: absolute;
-        color: white;
-        font-size: 20px;
-        font-weight: bold;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
         }
 
         .menu-name.rose {
-        top: 60px;
-        right: 380px;
+            top: 60px;
+            right: 380px;
         }
 
         .menu-name.soup {
-        bottom: 220px;
-        right: 70px;
+            bottom: 220px;
+            right: 70px;
         }
 
         .menu-name.oil {
-        bottom: 50px;
-        right: 333px;
+            bottom: 50px;
+            right: 333px;
         }
 
         .visual .fade-in{
             opacity: 0;
         }
+
+        .infinite-slider {
+            overflow: hidden;
+            width: 100%;
+            height: 120px;
+        }
+
+        .infinite-slider .track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+        }
+
+        .infinite-slider img {
+            height: 100px;
+            flex-shrink: 0;
+        }
+
+        .infinite-slider.bottom {
+            position: absolute;
+            bottom: 0;
+        }
     </style>
 
 </head>
 <body>
-    
+        
+
     <section class="visual">
         <div class="inner">
             <div class="title">
@@ -103,11 +125,11 @@
                 </div>
                 <a href="#" class="btn btn--brown">떡볶이 메뉴 보러가기 →</a>
             <div class="fade-in">
-                <img src="menu_teokbokki_images/8.마라로제.png" alt="" class="Mara_Rose_image">
+                <img src="menu_teokbokki_images/08.마라로제.png" alt="" class="Mara_Rose_image">
                 <div class="menu-name rose">마라로제 떡볶이</div>
             </div>
             <div class="fade-in">
-                <img src="menu_teokbokki_images/7.마라국물.png" alt="" class="Mara_soup_image">
+                <img src="menu_teokbokki_images/07.마라국물.png" alt="" class="Mara_soup_image">
                 <div class="menu-name soup">마라국물 떡볶이</div>
             </div>
             <div class="fade-in">
@@ -116,6 +138,39 @@
             </div>
         </div>
     </section>
+
+        <div class="infinite-slider bottom">
+            <div class="track">
+            <img src="menu_teokbokki_images/13.스페샬마라기름.png" alt="">
+            <img src="menu_teokbokki_images/12.스페샬불고기.png" alt="">
+            <img src="menu_teokbokki_images/11.스페샬부대.png" alt="">
+            <img src="menu_teokbokki_images/10.스페샬마라.png" alt="">
+            <img src="menu_teokbokki_images/09.스페샬.png" alt="">
+            <img src="menu_teokbokki_images/08.마라로제.png" alt="">
+            <img src="menu_teokbokki_images/07.마라국물.png" alt="">
+            <img src="menu_teokbokki_images/06.불맵국물.png" alt="">
+            <img src="menu_teokbokki_images/05.짜장국물.png" alt="">
+            <img src="menu_teokbokki_images/04.깻잎국물.png" alt="">
+            <img src="menu_teokbokki_images/03.국물.png" alt="">
+            <img src="menu_teokbokki_images/02.강정.png" alt="">
+            <img src="menu_teokbokki_images/01.가래떡볶이.png" alt="">
+            <img src="menu_teokbokki_images/13.스페샬마라기름.png" alt="">
+            <img src="menu_teokbokki_images/12.스페샬불고기.png" alt="">
+            <img src="menu_teokbokki_images/11.스페샬부대.png" alt="">
+            <img src="menu_teokbokki_images/10.스페샬마라.png" alt="">
+            <img src="menu_teokbokki_images/09.스페샬.png" alt="">
+            <img src="menu_teokbokki_images/08.마라로제.png" alt="">
+            <img src="menu_teokbokki_images/07.마라국물.png" alt="">
+            <img src="menu_teokbokki_images/06.불맵국물.png" alt="">
+            <img src="menu_teokbokki_images/05.짜장국물.png" alt="">
+            <img src="menu_teokbokki_images/04.깻잎국물.png" alt="">
+            <img src="menu_teokbokki_images/03.국물.png" alt="">
+            <img src="menu_teokbokki_images/02.강정.png" alt="">
+            <img src="menu_teokbokki_images/01.가래떡볶이.png" alt="">
+            
+        
+        </div>
+    </div>
 
     <script>
         const fadeEls = document.querySelectorAll('.visual .fade-in');
@@ -126,6 +181,43 @@
                 opacity: 1
             });
         });
+
+
+        // 끊김 없는 무한 슬라이더 (modifiers 플러그인 이용)
+        function startInfiniteSlider(selector, direction = 'left') {
+        const track = document.querySelector(`${selector} .track`);
+        const totalWidth = track.scrollWidth / 1;
+
+            gsap.to(track, {
+            x: direction === 'left' ? `-=${totalWidth}` : `+=${totalWidth}`,
+            duration: 30,
+            ease: "none",
+            repeat: -1,
+            modifiers: {
+                x: gsap.utils.unitize(x => {
+                    let value = parseFloat(x);
+
+                    if (direction === 'left') {
+                    if (value <= -totalWidth) {
+                        value += totalWidth;
+                    }
+                } else {
+                    if (value >= 0) {
+                        value -= totalWidth;
+                    }
+                }
+
+                return value;
+                })
+            }
+        });
+    }
+
+        // 하단: 오른 → 왼
+        startInfiniteSlider('.infinite-slider.bottom', 'right');
+    </script>
+
+
     </script>
 
 
