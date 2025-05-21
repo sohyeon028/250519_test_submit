@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+
+        .inner {
+        width: 1920px;
+        margin: 0 auto;
+        position: relative;
+
+        background: linear-gradient(to right, #f14949, #850d0d);
+        }
+    
+        .visual {
+            margin-top: 120px;
+        }
+
+        .visual .inner{
+            height: 660px;
+        }
+
+        .visual .title{
+            font-size: 30px;
+            position: absolute;
+            top: 180px;
+            left: 130px;
+            color: white;
+            text-align: center;
+        }
+
+        .btn{
+            position: absolute;
+            bottom: 40px;
+            left: 320px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .visual .Mara_Rose_image{
+            width: 26%;
+            position: absolute;
+            top: 30px;
+            right: 500px;
+        }
+
+        .visual .Special_Mara_Oil_image{
+            width: 29%;
+            position: absolute;
+            right: 400px;
+            bottom: 15px;
+        }
+
+        .visual .Mara_soup_image{
+            width: 28%;
+            position: absolute;
+            bottom: 230px;
+            right: 50px;
+        }
+
+        .menu-name {
+        position: absolute;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+
+        .menu-name.rose {
+        top: 60px;
+        right: 380px;
+        }
+
+        .menu-name.soup {
+        bottom: 220px;
+        right: 70px;
+        }
+
+        .menu-name.oil {
+        bottom: 50px;
+        right: 333px;
+        }
+
+        .visual .fade-in{
+            opacity: 0;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <section class="visual">
+        <div class="inner">
+            <div class="title">
+                <h2>매콤함과 얼얼함에 중독되는<br> 🔥마라 시리즈 떡볶이 출시🔥</h2>
+                </div>
+                <a href="#" class="btn btn--brown">떡볶이 메뉴 보러가기 →</a>
+            <div class="fade-in">
+                <img src="menu_teokbokki_images/8.마라로제.png" alt="" class="Mara_Rose_image">
+                <div class="menu-name rose">마라로제 떡볶이</div>
+            </div>
+            <div class="fade-in">
+                <img src="menu_teokbokki_images/7.마라국물.png" alt="" class="Mara_soup_image">
+                <div class="menu-name soup">마라국물 떡볶이</div>
+            </div>
+            <div class="fade-in">
+                <img src="menu_teokbokki_images/13.스페샬마라기름.png" alt="" class="Special_Mara_Oil_image">
+                <div class="menu-name oil">스페셜 마라 기름</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const fadeEls = document.querySelectorAll('.visual .fade-in');
+        fadeEls.forEach(function (fadeEl, index) {
+            gsap.to(fadeEl, {
+                duration: 1,
+                delay: (index + 1) * .7, // 0.7, 1.4, 2.1, 2.7
+                opacity: 1
+            });
+        });
+    </script>
+
+
+</body>
+</html>
