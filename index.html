@@ -100,10 +100,11 @@
         }
 
         .infinite-slider .track {
-        transform: translate(0);
             display: flex;
-            gap: 20px;
-            white-space: nowrap;
+        flex-wrap: nowrap;
+        gap: 0;              /* gap 제거 */
+        margin: 0;
+        padding: 0;
         }
 
         .infinite-slider .track img {
@@ -201,38 +202,35 @@
 
 
         // 끊김 없는 무한 슬라이더 (GSAP modifiers 사용 + 중복 방지)
-function startInfiniteSlider(selector, direction = 'left', duration = 20) {
-    const track = document.querySelector(`${selector} .track`);
-    if (!track) return;
+        function startInfiniteSlider(selector, direction = 'left', duration = 20) {
+        const track = document.querySelector(`${selector} .track`);
+            if (!track) return;
 
-    // 기존 애니메이션 제거 (중복 실행 방지)
-    gsap.killTweensOf(track);
+        // 기존 애니메이션 제거 (중복 실행 방지)
+        gsap.killTweensOf(track);
 
-    const totalWidth = track.scrollWidth;
+        const totalWidth = track.scrollWidth;
 
-    gsap.to(track, {
-        x: direction === 'left' ? `-=${totalWidth}` : `+=${totalWidth}`,
-        duration: duration,
-        ease: "none",
-        repeat: -1,
-        modifiers: {
-            x: gsap.utils.unitize(x => {
-                let value = parseFloat(x);
-                return direction === 'left'
-                    ? (value <= -totalWidth ? value + totalWidth : value)
-                    : (value >= 0 ? value - totalWidth : value);
-            })
-        }
-    });
-}
+        gsap.to(track, {
+            x: direction === 'left' ? `-=${totalWidth}` : `+=${totalWidth}`,
+            duration: duration,
+            ease: "none",
+            repeat: -1,
+            modifiers: {
+                x: gsap.utils.unitize(x => {
+                    let value = parseFloat(x);
+                    return direction === 'left'
+                        ? (value <= -totalWidth ? value + totalWidth : value)
+                        : (value >= 0 ? value - totalWidth : value);
+                })
+            }
+        });
+    }
 
         // 하단: 오른 → 왼
         startInfiniteSlider('.infinite-slider.bottom', 'right');
 
         
-    </script>
-
-
     </script>
 
 
